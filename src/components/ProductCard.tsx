@@ -4,10 +4,15 @@ import { ShoppingCart } from "lucide-react";
 import Rating from "./Ratings";
 import { useState } from "react";
 import Modal from "./Modal";
+import { useAppDispatch } from "../redux/hooks";
+import { addToCard } from "../redux/feature/cartSlice";
 
 const ProductCard = ({ product }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const dispatch = useAppDispatch()
+
   const handleShowModal = (product: any) => {
     setSelectedProduct(product);
     setShowModal(true);
@@ -16,6 +21,9 @@ const ProductCard = ({ product }: any) => {
     setSelectedProduct(null);
     setShowModal(false);
   };
+  const handleAddtoCard = (product)=>{
+    dispatch(addToCard(product))
+  }
   return (
     <div>
       {showModal && (
@@ -38,6 +46,7 @@ const ProductCard = ({ product }: any) => {
           <button
             onClick={(e) => {
               e.stopPropagation();
+              handleAddtoCard(product)
             }}
             className="bg-primary text-white px-4 py-2 mt-2 rounded-md w-full"
           >

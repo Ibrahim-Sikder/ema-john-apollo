@@ -2,9 +2,11 @@
 import { Moon, ShoppingCart, Sun } from "lucide-react";
 import EmaJohn from "../../assets/ema-jogn-logo.png";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const Header = () => {
+  const products = useAppSelector((state)=>state.cart.products)
   return (
     <header className="bg-[#1c2b35] text-white">
       <nav className="container flex items-center justify-between space-x-10 py-4 ">
@@ -36,6 +38,7 @@ const Header = () => {
             >
               {/* <img src={ring} width="24" height="24" alt="" /> */}
               <ShoppingCart size={24} />
+              <span>{products?.length}</span>
             </Link>
           </li>
 
